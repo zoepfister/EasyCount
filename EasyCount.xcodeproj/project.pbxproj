@@ -10,7 +10,6 @@
 		745DBDBF23BFC868007B43FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745DBDBE23BFC868007B43FE /* AppDelegate.swift */; };
 		745DBDC223BFC868007B43FE /* EasyCount.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 745DBDC023BFC868007B43FE /* EasyCount.xcdatamodeld */; };
 		745DBDC423BFC868007B43FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745DBDC323BFC868007B43FE /* SceneDelegate.swift */; };
-		745DBDC623BFC868007B43FE /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745DBDC523BFC868007B43FE /* Event.swift */; };
 		745DBDC823BFC868007B43FE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745DBDC723BFC868007B43FE /* ContentView.swift */; };
 		745DBDCA23BFC86A007B43FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 745DBDC923BFC86A007B43FE /* Assets.xcassets */; };
 		745DBDCD23BFC86A007B43FE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 745DBDCC23BFC86A007B43FE /* Preview Assets.xcassets */; };
@@ -39,7 +38,6 @@
 		745DBDBE23BFC868007B43FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		745DBDC123BFC868007B43FE /* EasyCount.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EasyCount.xcdatamodel; sourceTree = "<group>"; };
 		745DBDC323BFC868007B43FE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		745DBDC523BFC868007B43FE /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		745DBDC723BFC868007B43FE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		745DBDC923BFC86A007B43FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		745DBDCC23BFC86A007B43FE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -101,7 +99,6 @@
 				745DBDE823BFCD13007B43FE /* Counter+CoreDataProperties.swift */,
 				745DBDBE23BFC868007B43FE /* AppDelegate.swift */,
 				745DBDC323BFC868007B43FE /* SceneDelegate.swift */,
-				745DBDC523BFC868007B43FE /* Event.swift */,
 				745DBDE523BFC99D007B43FE /* Counter.swift */,
 				74D0013423C0E28D0025329B /* CounterDetail.swift */,
 				745DBDC723BFC868007B43FE /* ContentView.swift */,
@@ -235,7 +232,6 @@
 				745DBDE923BFCD13007B43FE /* Counter+CoreDataClass.swift in Sources */,
 				745DBDED23BFCDA3007B43FE /* CounterDetail+CoreDataClass.swift in Sources */,
 				74D0013523C0E28D0025329B /* CounterDetail.swift in Sources */,
-				745DBDC623BFC868007B43FE /* Event.swift in Sources */,
 				745DBDC823BFC868007B43FE /* ContentView.swift in Sources */,
 				745DBDE623BFC99D007B43FE /* Counter.swift in Sources */,
 				745DBDEA23BFCD13007B43FE /* Counter+CoreDataProperties.swift in Sources */,

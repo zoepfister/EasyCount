@@ -12,12 +12,7 @@
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="counter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Counter" inverseName="counterDetails" inverseEntity="Counter"/>
     </entity>
-    <entity name="Event" representedClassName="Event" codeGenerationType="class">
-        <attribute name="timestamp" optional="YES" attributeType="Date"/>
-        <userInfo/>
-    </entity>
     <elements>
-        <element name="Event" positionX="261" positionY="189" width="128" height="60"/>
         <element name="Counter" positionX="261" positionY="198" width="128" height="103"/>
         <element name="CounterDetail" positionX="270" positionY="207" width="128" height="103"/>
     </elements>

@@ -9,6 +9,13 @@
 import SwiftUI
 import CoreData
 
+private let dateFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .medium
+    dateFormatter.timeStyle = .short
+    return dateFormatter
+}()
+
 extension Counter {
     static func create(in managedObjectContext: NSManagedObjectContext, with name: String?){
         let newEvent = self.init(context: managedObjectContext)
@@ -27,6 +34,35 @@ extension Counter {
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
+    
+    // Function that creates a file and returns it's URL
+    func exportToCSV() throws -> URL {
+        // filename is name + date
+        let fileName = "\(self.wrappedName) - \(dateFormatter.string(from: self.timestamp!))"
+        let documentDirectory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        guard let fileURL = documentDirectory?.appendingPathComponent(fileName).appendingPathExtension("csv") else {
+            throw NSError()
+        }
+        let csvString = writeWinesToCSV()
+        try csvString.write(to: fileURL, atomically: true, encoding: .utf8)
+        return fileURL
+    }
+    
+    private func writeWinesToCSV() -> String {
+        let firstline = "name, count\n"
+        var csvData = ""
+        if self.counterDetailsArray.count > 0 {
+            for detailCounter in self.counterDetailsArray {
+                if detailCounter.count > 0 {
+                    csvData.append("\(detailCounter.wrappedName), \(detailCounter.count)\n")
+                }
+            }
+            return firstline + csvData
+        } else {
+            return ""
+        }
+    }
+    
 }
 
 extension Collection where Element == Counter, Index == Int {

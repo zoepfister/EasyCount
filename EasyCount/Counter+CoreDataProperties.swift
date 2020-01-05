@@ -44,6 +44,11 @@ extension Counter {
             return "Unnamed Counter"
         }
     }
+    
+    // If no date is found, .distantPast is used
+    public var wrappedTimestamp: Date {
+        timestamp ?? Date.distantPast
+    }
 
 }
 

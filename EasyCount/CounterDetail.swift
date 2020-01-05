@@ -36,8 +36,7 @@ extension CounterDetail {
         if self.count > 0 {
             self.count -= 1
         }
-    }
-    
+    }    
 }
 
 extension Collection where Element == CounterDetail, Index == Int {
