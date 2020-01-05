@@ -10,12 +10,12 @@ import SwiftUI
 import CoreData
 
 extension CounterDetail {
-    static func create(in managedObjectContext: NSManagedObjectContext, with counter: Counter) -> CounterDetail {
+    static func create(in managedObjectContext: NSManagedObjectContext) -> CounterDetail {
         let newEvent = self.init(context: managedObjectContext)
         newEvent.uuid = UUID()
         newEvent.count = 1
         newEvent.name = "\(Date())"
-        newEvent.counter = counter
+        // newEvent.counter = counter
         
         do {
             try  managedObjectContext.save()

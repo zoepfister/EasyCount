@@ -10,6 +10,12 @@
 import Foundation
 import CoreData
 
+private let dateFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .medium
+    dateFormatter.timeStyle = .medium
+    return dateFormatter
+}()
 
 extension Counter {
 
@@ -30,7 +36,13 @@ extension Counter {
     }
     
     public var wrappedName: String {
-        name ?? "Unnamed Counter"
+        if let wName = name {
+            return wName
+        } else if let wDate = timestamp {
+            return "\(dateFormatter.string(from: wDate))"
+        } else {
+            return "Unnamed Counter"
+        }
     }
 
 }
