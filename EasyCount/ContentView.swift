@@ -181,15 +181,7 @@ struct DetailRow: View {
             Text("\(detail.count)")
                 .fontWeight(.heavy)
                 .frame(maxWidth: .some(CGFloat(50.0)), alignment: .trailing)
-            Stepper("", onIncrement: {
-                self.detail.countUp()
-                // edit your proposed progress amount here
-                print("Adding to age")
-            }, onDecrement: {
-                self.detail.countDown()
-                // edit your proposed progress amount here
-                print("Subtracting from age")
-            })
+            Stepper(value: $detail.count, in: 0...99999, step: 1){Text("")}
         }
     }
 }

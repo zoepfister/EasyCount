@@ -27,16 +27,6 @@ extension CounterDetail {
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
-    
-    func countUp() {
-        self.count += 1
-    }
-    
-    func countDown() {
-        if self.count > 0 {
-            self.count -= 1
-        }
-    }    
 }
 
 extension Collection where Element == CounterDetail, Index == Int {
