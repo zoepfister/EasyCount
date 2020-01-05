@@ -230,7 +230,7 @@ struct DetailRow: View {
             Text("\(detail.wrappedName)").frame(maxWidth: .infinity, alignment: .leading)
             Text("\(detail.count)")
                 .fontWeight(.heavy)
-                .frame(minWidth: .some(CGFloat(50.0)), alignment: .trailing)
+                .frame(width: .some(CGFloat(60.0)), alignment: .trailing)
             Stepper(value: $detail.count, in: 0 ... 99999, step: 1) { Text("") }
         }.padding(CGFloat(self.settings.listPadding))
     }
