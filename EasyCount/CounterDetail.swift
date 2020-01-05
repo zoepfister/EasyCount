@@ -33,7 +33,9 @@ extension CounterDetail {
     }
     
     func countDown() {
-        self.count -= 1
+        if self.count > 0 {
+            self.count -= 1
+        }
     }
     
 }

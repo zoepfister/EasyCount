@@ -127,8 +127,12 @@ struct DetailRow: View {
     var viewContext
     
     var body: some View {
-        HStack(alignment: .center, spacing: 20) {
-            Stepper("\(detail.wrappedName): \(detail.count)", onIncrement: {
+        HStack(alignment: .center) {
+            Text("\(detail.wrappedName)").frame(maxWidth: .infinity, alignment: .leading)
+            Text("\(detail.count)")
+                .fontWeight(.heavy)
+                .frame(maxWidth: .some(CGFloat(50.0)), alignment: .trailing)
+            Stepper("", onIncrement: {
                 self.detail.countUp()
                 // edit your proposed progress amount here
                 print("Adding to age")
@@ -148,63 +152,3 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-// https://stackoverflow.com/questions/56726663/how-to-add-a-textfield-to-alert-in-swiftui
-
-private func alert(with moc: NSManagedObjectContext, title: String = "Title", message: String?) -> CounterDetail? {
-    
-    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-    
-    alert.addTextField() { textField in
-        textField.placeholder = "Enter some text"
-    }
-    
-    let newCounterDetail: CounterDetail = CounterDetail.create(in: moc)
-    
-    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in
-        
-    })
-    alert.addAction(UIAlertAction(title: "Add", style: .default) { _ in
-        newCounterDetail.name = alert.textFields![0].text
-    
-    })
-    showAlert(alert: alert)
-    
-    return newCounterDetail
-}
-
-func showAlert(alert: UIAlertController) {
-    if let controller = topMostViewController() {
-        controller.present(alert, animated: true, completion: nil)
-    }
-}
-
-private func keyWindow() -> UIWindow? {
-    return UIApplication.shared.connectedScenes
-    .filter {$0.activationState == .foregroundActive}
-    .compactMap {$0 as? UIWindowScene}
-    .first?.windows.filter {$0.isKeyWindow}.first
-}
-
-private func topMostViewController() -> UIViewController? {
-    guard let rootController = keyWindow()?.rootViewController else {
-        return nil
-    }
-    return topMostViewController(for: rootController)
-}
-
-private func topMostViewController(for controller: UIViewController) -> UIViewController {
-    if let presentedController = controller.presentedViewController {
-        return topMostViewController(for: presentedController)
-    } else if let navigationController = controller as? UINavigationController {
-        guard let topController = navigationController.topViewController else {
-            return navigationController
-        }
-        return topMostViewController(for: topController)
-    } else if let tabController = controller as? UITabBarController {
-        guard let topController = tabController.selectedViewController else {
-            return tabController
-        }
-        return topMostViewController(for: topController)
-    }
-    return controller
-}
