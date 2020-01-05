@@ -49,7 +49,7 @@ struct MasterView: View {
         List {
             ForEach(counters, id: \.self) { event in
                 NavigationLink(
-                    destination: DetailView(counter: event, counterDetails: event.counterDetailsArray)
+                    destination: DetailView(filter: event)
                 ) {
                     VStack(alignment: .leading) {
                         Text("\(event.wrappedName)")
@@ -80,13 +80,27 @@ struct MasterView: View {
 }
 
 struct DetailView: View {
-    @ObservedObject var counter: Counter
-    @State var counterDetails: [CounterDetail]
+    var counter: Counter
     @State private var newText: String = ""
-
+    
+    var fetchRequest: FetchRequest<CounterDetail>
+    var counterDetails: FetchedResults<CounterDetail>{fetchRequest.wrappedValue}
+    
     @Environment(\.managedObjectContext)
     var viewContext
-
+    
+    // Convenience Init to allow a fetch request using a filter predicate (in this case, the current
+    // counter. Source:
+    // https://www.hackingwithswift.com/quick-start/ios-swiftui/dynamically-filtering-fetchrequest-with-swiftui
+    init(filter: Counter) {
+        fetchRequest = FetchRequest(
+        entity: CounterDetail.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \CounterDetail.name, ascending: true)],
+        predicate: NSPredicate(format: "counter == %@", filter),
+        animation: .default)
+        self.counter = filter
+    }
+    
     var body: some View {
         List {
             ForEach(counterDetails, id: \.self) { detail in
@@ -94,7 +108,6 @@ struct DetailView: View {
             }
             .onDelete { indices in
                 self.counterDetails.delete(at: indices, from: self.viewContext)
-                self.counterDetails.remove(atOffsets: indices)
             }
             
             HStack {
@@ -106,7 +119,6 @@ struct DetailView: View {
                                 let newCounter = CounterDetail.create(in: self.viewContext)
                                 newCounter.counter = self.counter
                                 newCounter.name = self.newText
-                                self.counterDetails.append(newCounter)
                                 self.newText = ""
                             }
                         }
