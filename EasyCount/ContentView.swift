@@ -21,21 +21,66 @@ struct ContentView: View {
     @Environment(\.managedObjectContext)
     var viewContext
 
+    @State var isPreferencesPresented = false
+
     var body: some View {
         NavigationView {
             MasterView()
-
                 .navigationBarTitle(Text("Counters"))
-                .navigationBarItems(
-                    trailing: EditButton()
-                )
-        }.navigationViewStyle(DoubleColumnNavigationViewStyle())
+                .navigationBarItems(trailing: Button(
+                    action: {
+                        self.isPreferencesPresented = true
+                    }
+                ) {
+                    Image(systemName: "gear")
+                })
+        }
+        // Show the Preference View sheet
+        .sheet(isPresented: $isPreferencesPresented,
+               onDismiss: {
+                   self.isPreferencesPresented = false
+               },
+               content: {
+                   PreferenceView()
+        })
+        .navigationViewStyle(DoubleColumnNavigationViewStyle())
+    }
+}
+
+struct PreferenceView: View {
+    // Actual settings variable
+    @ObservedObject var settings = UserSettings()
+
+    var body: some View {
+        VStack {
+            Spacer(minLength: 50.0)
+            Text("List padding").font(.title).fontWeight(.heavy).frame(maxWidth: .infinity, alignment: .leading).padding(.leading)
+            Slider(value: $settings.listPadding, in: 1.0 ... 15.0, step: 1.0, onEditingChanged: { _ in }).padding(.leading).padding(.trailing)
+            Text("\(Int(self.settings.listPadding))").fontWeight(.heavy)
+            List {
+                VStack(alignment: .leading) {
+                    Text("Counter 1 Name")
+                    Text("\(Date(), formatter: dateFormatter)")
+                        .fontWeight(.light)
+                        .font(.system(size: 14))
+                }.padding(CGFloat(self.settings.listPadding))
+                VStack(alignment: .leading) {
+                    Text("Counter 2 Name")
+                    Text("\(Date(), formatter: dateFormatter)")
+                        .fontWeight(.light)
+                        .font(.system(size: 14))
+                }.padding(CGFloat(self.settings.listPadding))
+            }
+        }
     }
 }
 
 struct MasterView: View {
     @Environment(\.managedObjectContext)
     var viewContext
+
+    // User settings
+    @State private var settings = UserSettings()
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Counter.timestamp, ascending: true)],
@@ -55,7 +100,7 @@ struct MasterView: View {
                         Text("\(event.timestamp!, formatter: dateFormatter)")
                             .fontWeight(.light)
                             .font(.system(size: 14))
-                    }
+                    }.padding(CGFloat(self.settings.listPadding))
                 }
             }.onDelete { indices in
                 self.counters.delete(at: indices, from: self.viewContext)
@@ -74,22 +119,21 @@ struct MasterView: View {
                 ) {
                     Image(systemName: "plus")
                 }
-            }
-        }
+            }.padding(CGFloat(self.settings.listPadding))
+        }.padding(CGFloat(self.settings.listPadding))
     }
 }
 
 struct DetailView: View {
-    
     // Parent counter of CounterDetail
     var counter: Counter
-    
+
     // Variable for creating a new Counter within DetailView
     @State private var newText: String = ""
-    
+
     // Boolian to show the Share Sheet
     @State private var showShareSheet = false
-    
+
     // URL that eventually stores the CSV export file
     @State private var csvFileURL: URL?
     @State private var errorAlertIsPresented = false
@@ -99,9 +143,12 @@ struct DetailView: View {
     // Fetch request and result
     var fetchRequest: FetchRequest<CounterDetail>
     var counterDetails: FetchedResults<CounterDetail> { fetchRequest.wrappedValue }
-    
+
     @Environment(\.managedObjectContext)
     var viewContext
+
+    // User settings
+    @State private var settings = UserSettings()
 
     // Convenience Init to allow a fetch request using a filter predicate (in this case, the current
     // counter. Source:
@@ -141,8 +188,8 @@ struct DetailView: View {
                     ) {
                         Image(systemName: "plus")
                     }
-                }
-            }
+                }.padding(CGFloat(self.settings.listPadding))
+            }.padding(CGFloat(self.settings.listPadding))
             Spacer()
             Button(action: {
                 self.showShareSheet = true
@@ -153,7 +200,7 @@ struct DetailView: View {
                     self.errorText = ex.localizedDescription
                 }
             }) {
-                HStack{
+                HStack {
                     Text("Export to CSV")
                     Image(systemName: "square.and.arrow.up")
                 }
@@ -175,14 +222,17 @@ struct DetailRow: View {
     @Environment(\.managedObjectContext)
     var viewContext
 
+    // User settings
+    @State private var settings = UserSettings()
+
     var body: some View {
         HStack(alignment: .center) {
             Text("\(detail.wrappedName)").frame(maxWidth: .infinity, alignment: .leading)
             Text("\(detail.count)")
                 .fontWeight(.heavy)
-                .frame(maxWidth: .some(CGFloat(50.0)), alignment: .trailing)
-            Stepper(value: $detail.count, in: 0...99999, step: 1){Text("")}
-        }
+                .frame(minWidth: .some(CGFloat(50.0)), alignment: .trailing)
+            Stepper(value: $detail.count, in: 0 ... 99999, step: 1) { Text("") }
+        }.padding(CGFloat(self.settings.listPadding))
     }
 }
 
@@ -190,19 +240,5 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         return ContentView().environment(\.managedObjectContext, context)
-    }
-}
-
-struct ActivityView: UIViewControllerRepresentable {
-    let activityItems: [Any]
-    let applicationActivities: [UIActivity]?
-
-    func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityView>) -> UIActivityViewController {
-        return UIActivityViewController(activityItems: activityItems,
-                applicationActivities: applicationActivities)
-    }
-
-    func updateUIViewController(_ uiViewController: UIActivityViewController,
-                                context: UIViewControllerRepresentableContext<ActivityView>) {
     }
 }
