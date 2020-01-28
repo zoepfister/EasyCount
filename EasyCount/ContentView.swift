@@ -41,7 +41,7 @@ struct ContentView: View {
                    self.isPreferencesPresented = false
                },
                content: {
-                   PreferenceView()
+                   PreferenceView(showingPreferenceView: self.$isPreferencesPresented)
         })
         .navigationViewStyle(DoubleColumnNavigationViewStyle())
     }
@@ -60,11 +60,11 @@ struct MasterView: View {
     var counters: FetchedResults<Counter>
 
     @State private var newText: String = ""
-    
+
     private func createCounter() {
-        if !self.newText.isEmpty {
-            Counter.create(in: self.viewContext, with: self.newText)
-            self.newText = ""
+        if !newText.isEmpty {
+            Counter.create(in: viewContext, with: newText)
+            newText = ""
         }
     }
 
@@ -104,10 +104,8 @@ struct MasterView: View {
 
 struct CustomCountersTextfield: View {
     var placeholder: Text
-    @ObservedObject var counter: Counter;
+    @ObservedObject var counter: Counter
     @State var editedText: String = ""
-    
-    
 
     var body: some View {
         ZStack(alignment: .leading) {
