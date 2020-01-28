@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3530BBD723E06F0100C94E2F /* PreferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3530BBD623E06F0100C94E2F /* PreferenceView.swift */; };
 		353A882B23E0D842005E15D6 /* CounterDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353A882A23E0D842005E15D6 /* CounterDetailView.swift */; };
+		353A883323E0D9B3005E15D6 /* EasyCountUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353A883223E0D9B3005E15D6 /* EasyCountUITests.swift */; };
+		353A883B23E0D9F8005E15D6 /* AddCounterUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353A883A23E0D9F8005E15D6 /* AddCounterUITest.swift */; };
 		745DBDBF23BFC868007B43FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745DBDBE23BFC868007B43FE /* AppDelegate.swift */; };
 		745DBDC223BFC868007B43FE /* EasyCount.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 745DBDC023BFC868007B43FE /* EasyCount.xcdatamodeld */; };
 		745DBDC423BFC868007B43FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745DBDC323BFC868007B43FE /* SceneDelegate.swift */; };
@@ -28,6 +30,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		353A883523E0D9B3005E15D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 745DBDB323BFC868007B43FE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 745DBDBA23BFC868007B43FE;
+			remoteInfo = EasyCount;
+		};
 		745DBDD723BFC86A007B43FE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 745DBDB323BFC868007B43FE /* Project object */;
@@ -40,6 +49,10 @@
 /* Begin PBXFileReference section */
 		3530BBD623E06F0100C94E2F /* PreferenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceView.swift; sourceTree = "<group>"; };
 		353A882A23E0D842005E15D6 /* CounterDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterDetailView.swift; sourceTree = "<group>"; };
+		353A883023E0D9B3005E15D6 /* EasyCountUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyCountUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		353A883223E0D9B3005E15D6 /* EasyCountUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyCountUITests.swift; sourceTree = "<group>"; };
+		353A883423E0D9B3005E15D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		353A883A23E0D9F8005E15D6 /* AddCounterUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCounterUITest.swift; sourceTree = "<group>"; };
 		745DBDBB23BFC868007B43FE /* EasyCount.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyCount.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		745DBDBE23BFC868007B43FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		745DBDC123BFC868007B43FE /* EasyCount.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EasyCount.xcdatamodel; sourceTree = "<group>"; };
@@ -63,6 +76,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		353A882D23E0D9B3005E15D6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		745DBDB823BFC868007B43FE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -80,11 +100,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		353A883123E0D9B3005E15D6 /* EasyCountUITests */ = {
+			isa = PBXGroup;
+			children = (
+				353A883223E0D9B3005E15D6 /* EasyCountUITests.swift */,
+				353A883423E0D9B3005E15D6 /* Info.plist */,
+				353A883A23E0D9F8005E15D6 /* AddCounterUITest.swift */,
+			);
+			path = EasyCountUITests;
+			sourceTree = "<group>";
+		};
 		745DBDB223BFC868007B43FE = {
 			isa = PBXGroup;
 			children = (
 				745DBDBD23BFC868007B43FE /* EasyCount */,
 				745DBDD923BFC86A007B43FE /* EasyCountTests */,
+				353A883123E0D9B3005E15D6 /* EasyCountUITests */,
 				745DBDBC23BFC868007B43FE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -94,6 +125,7 @@
 			children = (
 				745DBDBB23BFC868007B43FE /* EasyCount.app */,
 				745DBDD623BFC86A007B43FE /* EasyCountTests.xctest */,
+				353A883023E0D9B3005E15D6 /* EasyCountUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -151,6 +183,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		353A882F23E0D9B3005E15D6 /* EasyCountUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 353A883723E0D9B3005E15D6 /* Build configuration list for PBXNativeTarget "EasyCountUITests" */;
+			buildPhases = (
+				353A882C23E0D9B3005E15D6 /* Sources */,
+				353A882D23E0D9B3005E15D6 /* Frameworks */,
+				353A882E23E0D9B3005E15D6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				353A883623E0D9B3005E15D6 /* PBXTargetDependency */,
+			);
+			name = EasyCountUITests;
+			productName = EasyCountUITests;
+			productReference = 353A883023E0D9B3005E15D6 /* EasyCountUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		745DBDBA23BFC868007B43FE /* EasyCount */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 745DBDDF23BFC86A007B43FE /* Build configuration list for PBXNativeTarget "EasyCount" */;
@@ -196,6 +246,10 @@
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Zoë Pfister";
 				TargetAttributes = {
+					353A882F23E0D9B3005E15D6 = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 745DBDBA23BFC868007B43FE;
+					};
 					745DBDBA23BFC868007B43FE = {
 						CreatedOnToolsVersion = 11.3;
 					};
@@ -220,11 +274,19 @@
 			targets = (
 				745DBDBA23BFC868007B43FE /* EasyCount */,
 				745DBDD523BFC86A007B43FE /* EasyCountTests */,
+				353A882F23E0D9B3005E15D6 /* EasyCountUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		353A882E23E0D9B3005E15D6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		745DBDB923BFC868007B43FE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -245,6 +307,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		353A882C23E0D9B3005E15D6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				353A883B23E0D9F8005E15D6 /* AddCounterUITest.swift in Sources */,
+				353A883323E0D9B3005E15D6 /* EasyCountUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		745DBDB723BFC868007B43FE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -277,6 +348,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		353A883623E0D9B3005E15D6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 745DBDBA23BFC868007B43FE /* EasyCount */;
+			targetProxy = 353A883523E0D9B3005E15D6 /* PBXContainerItemProxy */;
+		};
 		745DBDD823BFC86A007B43FE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 745DBDBA23BFC868007B43FE /* EasyCount */;
@@ -296,6 +372,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		353A883823E0D9B3005E15D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KV8UJJSSGQ;
+				INFOPLIST_FILE = EasyCountUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.zoepfister.EasyCountUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = EasyCount;
+			};
+			name = Debug;
+		};
+		353A883923E0D9B3005E15D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KV8UJJSSGQ;
+				INFOPLIST_FILE = EasyCountUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.zoepfister.EasyCountUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = EasyCount;
+			};
+			name = Release;
+		};
 		745DBDDD23BFC86A007B43FE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -497,6 +611,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		353A883723E0D9B3005E15D6 /* Build configuration list for PBXNativeTarget "EasyCountUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				353A883823E0D9B3005E15D6 /* Debug */,
+				353A883923E0D9B3005E15D6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		745DBDB623BFC868007B43FE /* Build configuration list for PBXProject "EasyCount" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

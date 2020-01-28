@@ -9,6 +9,7 @@
 import CoreData
 import Foundation
 import SwiftUI
+import Combine
 
 private let dateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
@@ -87,18 +88,48 @@ struct MasterView: View {
             HStack {
                 TextField("Enter a new counter name", text: $newText, onCommit: {
                     self.createCounter()
-                })
+                    })
                 Button(
                     action: {
                         withAnimation {
                             self.createCounter()
+                            UIApplication.shared.windows.forEach({$0.endEditing(false)})
                         }
                     }
                 ) {
                     Image(systemName: "plus")
-                }
+                    }.accessibility(label: Text("Add counter"))
             }.padding(CGFloat(self.settings.listPadding))
-        }.padding(CGFloat(self.settings.listPadding))
+        }.padding(CGFloat(self.settings.listPadding)).modifier(AdaptsToSoftwareKeyboard())
+    }
+}
+
+// Struct that scrolls the view as far as the keyboard will hide the screen such that text is visible
+// https://stackoverflow.com/questions/56716311/how-to-show-complete-list-when-keyboard-is-showing-up-in-swiftui
+struct AdaptsToSoftwareKeyboard: ViewModifier {
+
+    @State var currentHeight: CGFloat = 0
+
+    func body(content: Content) -> some View {
+        content
+            .padding(.bottom, self.currentHeight)
+            .edgesIgnoringSafeArea(self.currentHeight == 0 ? Edge.Set() : .bottom)
+            .onAppear(perform: subscribeToKeyboardEvents)
+    }
+
+    private let keyboardWillOpen = NotificationCenter.default
+        .publisher(for: UIResponder.keyboardWillShowNotification)
+        .map { $0.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect }
+        .map { $0.height + 50.0 }
+
+    private let keyboardWillHide =  NotificationCenter.default
+        .publisher(for: UIResponder.keyboardWillHideNotification)
+        .map { _ in CGFloat.zero }
+
+    private func subscribeToKeyboardEvents() {
+        _ = Publishers.Merge(keyboardWillOpen, keyboardWillHide)
+            .subscribe(on: RunLoop.main)
+            .assign(to: \.self.currentHeight, on: self)
     }
 }
 
