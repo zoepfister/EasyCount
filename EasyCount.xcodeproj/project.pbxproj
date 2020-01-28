@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3530BBD723E06F0100C94E2F /* PreferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3530BBD623E06F0100C94E2F /* PreferenceView.swift */; };
 		745DBDBF23BFC868007B43FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745DBDBE23BFC868007B43FE /* AppDelegate.swift */; };
 		745DBDC223BFC868007B43FE /* EasyCount.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 745DBDC023BFC868007B43FE /* EasyCount.xcdatamodeld */; };
 		745DBDC423BFC868007B43FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745DBDC323BFC868007B43FE /* SceneDelegate.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3530BBD623E06F0100C94E2F /* PreferenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceView.swift; sourceTree = "<group>"; };
 		745DBDBB23BFC868007B43FE /* EasyCount.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyCount.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		745DBDBE23BFC868007B43FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		745DBDC123BFC868007B43FE /* EasyCount.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EasyCount.xcdatamodel; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				745DBDBE23BFC868007B43FE /* AppDelegate.swift */,
 				745DBDC323BFC868007B43FE /* SceneDelegate.swift */,
 				745DBDE523BFC99D007B43FE /* Counter.swift */,
+				3530BBD623E06F0100C94E2F /* PreferenceView.swift */,
 				74D0013423C0E28D0025329B /* CounterDetail.swift */,
 				745DBDC723BFC868007B43FE /* ContentView.swift */,
 				74FA302A23C28432004528D5 /* UserSettings.swift */,
@@ -244,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74FA302923C27FD5004528D5 /* ActivityView.swift in Sources */,
+				3530BBD723E06F0100C94E2F /* PreferenceView.swift in Sources */,
 				74FA302B23C28432004528D5 /* UserSettings.swift in Sources */,
 				745DBDE923BFCD13007B43FE /* Counter+CoreDataClass.swift in Sources */,
 				745DBDED23BFCDA3007B43FE /* CounterDetail+CoreDataClass.swift in Sources */,

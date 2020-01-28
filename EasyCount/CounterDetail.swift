@@ -10,10 +10,10 @@ import SwiftUI
 import CoreData
 
 extension CounterDetail {
-    static func create(in managedObjectContext: NSManagedObjectContext) -> CounterDetail {
+    static func create(in managedObjectContext: NSManagedObjectContext, startCount: Int64 = 1) -> CounterDetail {
         let newEvent = self.init(context: managedObjectContext)
         newEvent.uuid = UUID()
-        newEvent.count = 1
+        newEvent.count = startCount
         newEvent.name = "\(Date())"
         // newEvent.counter = counter
         
@@ -27,6 +27,15 @@ extension CounterDetail {
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
+    
+    func countUp(by amount: Int64){
+        self.count += amount
+    }
+    
+    func countDown(by amount: Int64){
+        self.count -= amount
+    }
+    
 }
 
 extension Collection where Element == CounterDetail, Index == Int {

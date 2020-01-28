@@ -15,12 +15,30 @@ final class UserSettings: ObservableObject {
 
     let objectWillChange = PassthroughSubject<Void, Never>()
 
+    // Defines the List padding in the content and detailviews
     @UserDefault("ListPadding", defaultValue: 1.0)
     var listPadding: Float {
         willSet {
             objectWillChange.send()
         }
     }
+    
+    // Defines how many steps should be counted when tapping + / - on each detailcounter
+    @UserDefault("StepCount", defaultValue: 1)
+    var stepCount: Int {
+        willSet {
+            objectWillChange.send()
+        }
+    }
+    
+    // Defines if the program should start counting from 0 or not when creating a new detailcounter
+    @UserDefault("StartCountingAtZero", defaultValue: false)
+    var startCountingAtZero: Bool {
+        willSet {
+            objectWillChange.send()
+        }
+    }
+    
 }
 
 @propertyWrapper

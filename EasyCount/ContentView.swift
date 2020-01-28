@@ -47,40 +47,12 @@ struct ContentView: View {
     }
 }
 
-struct PreferenceView: View {
-    // Actual settings variable
-    @ObservedObject var settings = UserSettings()
-
-    var body: some View {
-        VStack {
-            Spacer(minLength: 50.0)
-            Text("List padding").font(.title).fontWeight(.heavy).frame(maxWidth: .infinity, alignment: .leading).padding(.leading)
-            Slider(value: $settings.listPadding, in: 1.0 ... 15.0, step: 1.0, onEditingChanged: { _ in }).padding(.leading).padding(.trailing)
-            Text("\(Int(self.settings.listPadding))").fontWeight(.heavy)
-            List {
-                VStack(alignment: .leading) {
-                    Text("Counter 1 Name")
-                    Text("\(Date(), formatter: dateFormatter)")
-                        .fontWeight(.light)
-                        .font(.system(size: 14))
-                }.padding(CGFloat(self.settings.listPadding))
-                VStack(alignment: .leading) {
-                    Text("Counter 2 Name")
-                    Text("\(Date(), formatter: dateFormatter)")
-                        .fontWeight(.light)
-                        .font(.system(size: 14))
-                }.padding(CGFloat(self.settings.listPadding))
-            }
-        }
-    }
-}
-
 struct MasterView: View {
     @Environment(\.managedObjectContext)
     var viewContext
 
     // User settings
-    @State private var settings = UserSettings()
+    @ObservedObject private var settings = UserSettings()
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Counter.timestamp, ascending: true)],
@@ -178,7 +150,10 @@ struct DetailView: View {
                         action: {
                             withAnimation {
                                 if self.newText != "" {
-                                    let newCounter = CounterDetail.create(in: self.viewContext)
+                                    // Creating a new Detailcounter where the actual couting will occur. The initial value is set to the step amount if the user specified that counting should not start at 0.
+                                    let newCounter = self.settings.startCountingAtZero
+                                        ? CounterDetail.create(in: self.viewContext, startCount: Int64(0))
+                                        : CounterDetail.create(in: self.viewContext, startCount: Int64(self.settings.stepCount))
                                     newCounter.counter = self.counter
                                     newCounter.name = self.newText
                                     self.newText = ""
@@ -207,6 +182,7 @@ struct DetailView: View {
                 .sheet(isPresented: $showShareSheet, content: {
                     ActivityView(activityItems: [self.csvFileURL!] as [Any], applicationActivities: nil)
                 })
+
                 .alert(isPresented: $errorAlertIsPresented, content: {
                     Alert(title: Text("An error has ocurred during CSV-Export"), message: Text(self.errorText))
                 })
@@ -230,8 +206,10 @@ struct DetailRow: View {
             Text("\(detail.wrappedName)").frame(maxWidth: .infinity, alignment: .leading)
             Text("\(detail.count)")
                 .fontWeight(.heavy)
-                .frame(width: .some(CGFloat(60.0)), alignment: .trailing)
-            Stepper(value: $detail.count, in: 0 ... 99999, step: 1) { Text("") }
+                // setting animation to nil will remove a bug where the view could not handle adding 10 quickly (...)
+                .frame(alignment: .trailing).padding(.trailing, 10.0).padding(.leading, 10.0).animation(nil)
+            // Stepper with all necessary params to count correctly up to 99999
+            Stepper(value: $detail.count, in: 0 ... 99999, step: self.settings.stepCount) { Text("") }
         }.padding(CGFloat(self.settings.listPadding))
     }
 }
