@@ -60,6 +60,13 @@ struct MasterView: View {
     var counters: FetchedResults<Counter>
 
     @State private var newText: String = ""
+    
+    private func createCounter() {
+        if !self.newText.isEmpty {
+            Counter.create(in: self.viewContext, with: self.newText)
+            self.newText = ""
+        }
+    }
 
     var body: some View {
         List {
@@ -78,14 +85,13 @@ struct MasterView: View {
                 self.counters.delete(at: indices, from: self.viewContext)
             }
             HStack {
-                TextField("Enter a new counter name", text: $newText)
+                TextField("Enter a new counter name", text: $newText, onCommit: {
+                    self.createCounter()
+                })
                 Button(
                     action: {
                         withAnimation {
-                            if self.newText != "" {
-                                Counter.create(in: self.viewContext, with: self.newText)
-                                self.newText = ""
-                            }
+                            self.createCounter()
                         }
                     }
                 ) {
