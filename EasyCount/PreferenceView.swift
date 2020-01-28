@@ -24,7 +24,7 @@ struct PreferenceView: View {
         NavigationView {
             Form {
                 Section(header: Text("Counter Settings")) {
-                    Stepper(value: $settings.stepCount, in: 0 ... 100, step: 1) { Text("Step counter per tap: \(self.settings.stepCount)").fontWeight(.heavy) }
+                    Stepper(value: $settings.stepCount, in: 1 ... 100, step: 1) { Text("Step counter per tap: \(self.settings.stepCount)").fontWeight(.heavy) }
                     Toggle(isOn: $settings.startCountingAtZero) { Text("Start counting at 0").fontWeight(.heavy) }
                 }
                 Section(header: Text("List Padding")) {
