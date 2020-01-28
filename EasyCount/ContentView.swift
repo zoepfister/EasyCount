@@ -68,7 +68,7 @@ struct MasterView: View {
                     destination: DetailView(filter: event)
                 ) {
                     VStack(alignment: .leading) {
-                        CustomCountersTextfield(placeholder: Text(event.wrappedName).foregroundColor(.black), counter: event)
+                        CustomCountersTextfield(placeholder: Text(event.wrappedName), counter: event)
                         Text("\(event.timestamp!, formatter: dateFormatter)")
                             .fontWeight(.light)
                             .font(.system(size: 14))
@@ -100,17 +100,19 @@ struct CustomCountersTextfield: View {
     var placeholder: Text
     @ObservedObject var counter: Counter;
     @State var editedText: String = ""
-    var editingChanged: (Bool)->() = { _ in }
+    
     
 
     var body: some View {
         ZStack(alignment: .leading) {
             if editedText.isEmpty { placeholder }
-            TextField("", text: $editedText, onEditingChanged: editingChanged, onCommit: {
+            TextField("", text: $editedText, onCommit: {
                 self.counter.name = self.editedText
             }).onTapGesture {
                 self.editedText = self.counter.wrappedName
             }
+            // Hardcoding this for now. TODO: should be changed to some relative screen size
+            .frame(maxWidth: CGFloat(200.0))
         }
     }
 }
