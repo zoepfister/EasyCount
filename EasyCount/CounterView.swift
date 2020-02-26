@@ -18,7 +18,7 @@ private let dateFormatter: DateFormatter = {
     return dateFormatter
 }()
 
-struct ContentView: View {
+struct CounterView: View {
     @Environment(\.managedObjectContext)
     var viewContext
 
@@ -158,6 +158,6 @@ struct CustomCountersTextfield: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        return ContentView().environment(\.managedObjectContext, context)
+        return CounterView().environment(\.managedObjectContext, context)
     }
 }
